@@ -37,5 +37,6 @@ override.tf.json
 terraform.rc
 
 
-env.sh
+env.ps1
 env_template.sh
+.terraform.lock.hcl

@@ -1,3 +1,16 @@
+variable "aws_ami" {
+  description = "The AMI ID to use for the EC2 instance"
+  type        = string
+  default     = "ami-009082a6cd90ccd0e"
+
+  # us-west-2
+  # ami = "ami-05572e392e80aee89"
+  # eu-north-1
+  # ami           = "ami-0dd574ef87b79ac6c"
+  # eu-central-1
+  # ami-009082a6cd90ccd0e
+}
+
 # cidr settings
 variable "cidr_block_vpc" {
   description = "The CIDR block for the VPC"
@@ -52,20 +65,24 @@ variable "db_port" {
 }
 
 # region settings
+variable "region" {
+  description = "The AWS region to use for the RDS instance"
+  type        = string
+  #default     = "us-west-2"
+  default = "eu-central-1"
+}
+
 variable "az_1" {
   description = "The first availability zone to use for the RDS instance"
   type        = string
-  default     = "us-west-2a"
+  #default     = "us-west-2a"
+  default = "eu-central-1a"
 }
 
 variable "az_2" {
   description = "The second availability zone to use for the RDS instance"
   type        = string
-  default     = "us-west-2b"
+  #default     = "us-west-2b"
+  default = "eu-central-1b"
 }
 
-variable "region" {
-  description = "The AWS region to use for the RDS instance"
-  type        = string
-  default     = "us-west-2"
-}   

@@ -12,3 +12,15 @@ output "db_port" {
   value       = aws_db_instance.mysql_wordpress.port
   description = "The port the database is listening on"
 }
+
+output "privateKey" {
+  value       = tls_private_key.wp_private_key.private_key_pem
+  description = "The private key for the EC2 instance"
+  sensitive   = true
+}
+
+output "publicKey" {
+  value       = aws_key_pair.wp_key_pair.public_key
+  description = "The public key for the EC2 instance"
+  sensitive   = true
+}
