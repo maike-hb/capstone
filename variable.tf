@@ -41,15 +41,14 @@ variable "cidr_block_private_subnet2" {
 variable "db_username" {
   description = "The username for the database"
   type        = string
-  sensitive   = true
   default     = "admin"
 }
 
 variable "db_password" {
   description = "The password for the database"
   type        = string
-  sensitive   = true
   default     = "admin123"
+  sensitive   = true
 }
 
 variable "db_name" {

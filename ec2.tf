@@ -6,8 +6,26 @@ resource "aws_instance" "wordpress_server" {
   vpc_security_group_ids      = [aws_security_group.wordpress_sg.id]
   #availability_zone = "us-west-2a"
   key_name  = aws_key_pair.wp_key_pair.key_name
-  user_data = file("userData.sh")
+  user_data = data.template_file.init.rendered
   tags = {
     Name = "wordpress_server"
   }
+}
+
+data "template_file" "init" {
+  template = file("userData.sh")
+
+  vars = {
+    DB_NAME     = var.db_name
+    DB_USER     = var.db_username
+    DB_PASSWORD = var.db_password
+    DB_HOST     = aws_db_instance.mysql_wordpress.address
+  }
+}
+
+
+resource "aws_ec2_instance_state" "wordpress_server" {
+  instance_id = aws_instance.wordpress_server.id
+  #state       = "stopped"
+  state = "running"
 }

@@ -2,16 +2,11 @@
 
 during further training
 
-## Visual Studio Code AWS Credentials
-
-$Env:AWS_ACCESS_KEY_ID=""  
-$Env:AWS_SECRET_ACCESS_KEY=""  
-$Env:AWS_SESSION_TOKEN=""  
-
 ## Database
+Not for production use!
+This settings are just a case study. Never check in the infos about user name and password of the database!
 
-### connect 
-
+### DB connect 
 mysql -h <DB_ADDRESS> -P 3306 -u admin -p
 
 # Little Terraform Help
@@ -26,3 +21,6 @@ terraform output -raw publicKey
 
 terraform state list  
 terraform state rm <NAME_OF_OBJECT_TO_BE_REMOVED>  
+
+## Check logging of user_data
+cat /var/log/cloud-init-output.log
