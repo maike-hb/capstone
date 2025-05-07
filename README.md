@@ -25,3 +25,6 @@ terraform state rm <NAME_OF_OBJECT_TO_BE_REMOVED>
 
 ## Check logging of user_data
 cat /var/log/cloud-init-output.log
+
+# Wordpress
+These installation comes with a mysql, wordpress, php and wordpress cli installation. But you have to configure it. Scripts and examples are in the wordpress folder.

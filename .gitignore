@@ -40,3 +40,5 @@ terraform.rc
 env.ps1
 env_template.sh
 .terraform.lock.hcl
+
+wordpress/wordpress.properties
