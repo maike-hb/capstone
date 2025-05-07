@@ -5,6 +5,7 @@ during further training
 ## Database
 Not for production use!
 This settings are just a case study. Never check in the infos about user name and password of the database!
+Remove default value from variable.tf and you will be asked for the value.
 
 ### DB connect 
 mysql -h <DB_ADDRESS> -P 3306 -u admin -p

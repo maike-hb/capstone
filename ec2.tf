@@ -4,9 +4,8 @@ resource "aws_instance" "wordpress_server" {
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.public_subnet.id
   vpc_security_group_ids      = [aws_security_group.wordpress_sg.id]
-  #availability_zone = "us-west-2a"
-  key_name  = aws_key_pair.wp_key_pair.key_name
-  user_data = data.template_file.init.rendered
+  key_name                    = aws_key_pair.wp_key_pair.key_name
+  user_data                   = data.template_file.init.rendered
   tags = {
     Name = "wordpress_server"
   }
@@ -14,7 +13,6 @@ resource "aws_instance" "wordpress_server" {
 
 data "template_file" "init" {
   template = file("userData.sh")
-
   vars = {
     DB_NAME     = var.db_name
     DB_USER     = var.db_username

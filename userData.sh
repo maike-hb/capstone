@@ -7,27 +7,38 @@ dnf install httpd -y
 # install mariadb
 dnf install mariadb105 -y
 
-# install wordpress
-yum install php php-mysqlnd php-fpm php-xml php-mbstring -y
+# install wordpress and php packages
+dnf install php php-mysqlnd php-fpm php-xml php-mbstring -y
 cd /tmp
 wget https://wordpress.org/latest.tar.gz
 tar -xvzf latest.tar.gz
 mv wordpress/* /var/www/html/
 
+# install wordpress cli
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+php wp-cli.phar --info
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+
 # start httpd
-chown -R apache:apache /var/www/html/
-chmod -R 755 /var/www/html/
+chown -R ec2-user:apache /var/www/html
 systemctl start httpd
 systemctl enable httpd
 
+
+# Wordpress configuration
+echo "Start WordPress configuration"
 cd /var/www/html
+# Automate wp-config.php with database credentials
 cp wp-config-sample.php wp-config.php
 
-# Automate wp-config.php with database credentials
-sudo sed -i "s/define( 'DB_NAME', 'database_name_here' );/define( 'DB_NAME', '${DB_NAME}' );/" wp-config.php
-sudo sed -i "s/define( 'DB_USER', 'username_here' );/define( 'DB_USER', '${DB_USER}' );/" wp-config.php
-sudo sed -i "s/define( 'DB_PASSWORD', 'password_here' );/define( 'DB_PASSWORD', '${DB_PASSWORD}' );/" wp-config.php
-sudo sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', '${DB_HOST}' );/" wp-config.php
-sudo chmod 644 wp-config.php
+sed -i "s/database_name_here/${DB_NAME}/" wp-config.php
+sed -i "s/username_here/${DB_USER}/" wp-config.php
+sed -i "s/password_here/${DB_PASSWORD}/" wp-config.php
+sed -i "s/localhost/${DB_HOST}/" wp-config.php
+
+find /var/www/html -type f -exec chmod 644 {} \;
+find /var/www/html -type d -exec chmod 755 {} \;
 
 echo "userData.sh script executed successfully"
