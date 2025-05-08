@@ -28,3 +28,9 @@ cat /var/log/cloud-init-output.log
 
 # Wordpress
 These installation comes with a mysql, wordpress, php and wordpress cli installation. But you have to configure it. Scripts and examples are in the wordpress folder.
+
+# Other helpful stuff
+- scp -i PATH_TO_PRIVATE_KEY FILENAME ec2-user@IP_ADDRESS:/home/ec2-user/
+
+- Convert Windows Line Breaks to Linux (CRLF to LF)
+- sed -i.bak 's/\r$//g' FILENAME
